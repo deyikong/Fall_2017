@@ -21,7 +21,7 @@ namespace IMS_winform
         private void Type_Load(object sender, EventArgs e)
         {
             dataGridView1.AutoGenerateColumns = true;
-            string connectionString = "Server=Nan-PC\\MSSQLSERVER01;Database=IMS;Integrated Security=True";
+            string connectionString = "Server=localhost;Database=IMS;Integrated Security=True";
 
             string sqlCmd = "SELECT * FROM [dbo].[Type] ";
             SqlConnection conn = new SqlConnection(connectionString);
@@ -63,12 +63,11 @@ namespace IMS_winform
                  foreach (DataGridViewRow row in dataGridView1.SelectedRows)
                 {
                     //read the row Id
-                    int rowIndex = row["Id"].Index;
-                    dataGridView1.Rows.RemoveAt(rowIndex);
-                                  
-                    //delete the row with this Id from Database
-                   // row..Delete(row["Id"]);
+                    int rowIndex = (int)row.Cells["Id"].Value;
+            
 
+                    //delete the row with this Id from Database
+                    // dataGridView1.Rows.RemoveAt(rowIndex);
                 }
         }
     }
