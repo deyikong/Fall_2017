@@ -31,7 +31,7 @@
             this.newBtn = new System.Windows.Forms.Button();
             this.saveBtn = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
+            this.deletedBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,25 +64,25 @@
             this.dataGridView1.Size = new System.Drawing.Size(329, 154);
             this.dataGridView1.TabIndex = 3;
             // 
-            // button1
+            // deletedBtn
             // 
-            this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.Red;
-            this.button1.Location = new System.Drawing.Point(410, 48);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(35, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "X";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.deletedBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.deletedBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deletedBtn.ForeColor = System.Drawing.Color.Red;
+            this.deletedBtn.Location = new System.Drawing.Point(410, 48);
+            this.deletedBtn.Name = "deletedBtn";
+            this.deletedBtn.Size = new System.Drawing.Size(35, 23);
+            this.deletedBtn.TabIndex = 4;
+            this.deletedBtn.Text = "X";
+            this.deletedBtn.UseVisualStyleBackColor = true;
+            this.deletedBtn.Click += new System.EventHandler(this.deleteBtn_Click);
             // 
             // Type
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(470, 284);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.deletedBtn);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.newBtn);
@@ -98,7 +98,7 @@
         private System.Windows.Forms.Button newBtn;
         private System.Windows.Forms.Button saveBtn;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button deletedBtn;
     }
 }
 

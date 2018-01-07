@@ -21,7 +21,7 @@ namespace IMS_winform
         private void Type_Load(object sender, EventArgs e)
         {
             dataGridView1.AutoGenerateColumns = true;
-            string connectionString = "Server=localhost;Database=IMS;Integrated Security=True";
+            string connectionString = "Server=NAN-PC\\MSSQLSERVER01;Database=IMS;Integrated Security=True";
 
             string sqlCmd = "SELECT * FROM [dbo].[Type] ";
             SqlConnection conn = new SqlConnection(connectionString);
@@ -57,18 +57,37 @@ namespace IMS_winform
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void deleteBtn_Click(object sender, EventArgs e)
         {
             //selected row--to see which row user has picked to delete
                  foreach (DataGridViewRow row in dataGridView1.SelectedRows)
                 {
-                    //read the row Id
-                    int rowIndex = (int)row.Cells["Id"].Value;
-            
+                    //if (!row.IsNewRow)
+                    //{
+                    //    dataGridView1.Rows.Remove(row);
+                    //}
+                    //MessageBox.Show("Selected rows Deleted");
 
-                    //delete the row with this Id from Database
-                    // dataGridView1.Rows.RemoveAt(rowIndex);
-                }
+                    ////read the row Id
+                    int typeId = (int)row.Cells["Id"].Value;
+
+                    ////delete the row with this Id from Database
+                    string connectionString = "Server=NAN-PC\\MSSQLSERVER01;Database=IMS;Integrated Security=True;";
+
+                    SqlConnection conn = new SqlConnection(connectionString);
+
+                    conn.Open();
+
+                    string cmdText = "DELETE FROM [IMS].[dbo].[Type] WHERE Id =  @typeId ;";
+                    SqlCommand cmd = new SqlCommand(cmdText, conn);
+               
+
+                    cmd.ExecuteNonQuery();
+
+                    conn.Close();
+
+                    MessageBox.Show("Selected rows Deleted!");
+            }
         }
     }
 

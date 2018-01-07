@@ -20,7 +20,7 @@ namespace IMS_winform
 
         private void createBtn_Click(object sender, EventArgs e)
         {
-            string connectionString = "Server=NAN-PC;Database=IMS;Integrated Security=True;";
+            string connectionString = "Server=NAN-PC\\MSSQLSERVER01;Database=IMS;Integrated Security=True;";
 
             string cmdText =
                 "INSERT INTO [dbo].[Type] (Name, Description) VALUES (@type, @description);";
@@ -35,7 +35,7 @@ namespace IMS_winform
             SqlCommand cmd = new SqlCommand(cmdText, conn);
             cmd.Parameters.AddWithValue("@type", textBoxName.Text);
             cmd.Parameters.AddWithValue("@description", textBoxDes.Text);
-
+            
             //4 Execute Command
             cmd.ExecuteNonQuery();
 
