@@ -34,13 +34,13 @@ namespace IMS_winform
             DataSet types = new DataSet();
 
             sqlDataAdapter.Fill(types, "Type");
-        
 
             dataGridView1.DataSource = types.Tables[0];
 
             conn.Close();
 
         }
+
 
         private void newBtn_Click(object sender, EventArgs e)
         {
@@ -55,40 +55,99 @@ namespace IMS_winform
             {
                 MessageBox.Show(@"New Type created!");
             }
+            FormReLoad();
         }
 
         private void deleteBtn_Click(object sender, EventArgs e)
         {
             //selected row--to see which row user has picked to delete
-                 foreach (DataGridViewRow row in dataGridView1.SelectedRows)
-                {
-                    //if (!row.IsNewRow)
-                    //{
-                    //    dataGridView1.Rows.Remove(row);
-                    //}
-                    //MessageBox.Show("Selected rows Deleted");
+            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            {
+                //if (!row.IsNewRow)
+                //{
+                //    dataGridView1.Rows.Remove(row);
+                //}
+                //MessageBox.Show("Selected rows Deleted");
 
-                    ////read the row Id
-                    int typeId = (int)row.Cells["Id"].Value;
+                ////read the row Id
+                int typeId = (int)row.Cells["Id"].Value;
 
-                    ////delete the row with this Id from Database
-                    string connectionString = "Server=NAN-PC\\MSSQLSERVER01;Database=IMS;Integrated Security=True;";
+                ////delete the row with this Id from Database
+                string connectionString = "Server=NAN-PC\\MSSQLSERVER01;Database=IMS;Integrated Security=True;";
 
-                    SqlConnection conn = new SqlConnection(connectionString);
+                SqlConnection conn = new SqlConnection(connectionString);
 
-                    conn.Open();
+                conn.Open();
 
-                    string cmdText = "DELETE FROM [IMS].[dbo].[Type] WHERE Id =  @typeId ;";
-                    SqlCommand cmd = new SqlCommand(cmdText, conn);
-               
+                string cmdText = "DELETE FROM [IMS].[dbo].[Type] WHERE Id = @Id ;";
+                SqlCommand cmd = new SqlCommand(cmdText, conn);
+                cmd.Parameters.AddWithValue("@Id", typeId);
 
-                    cmd.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();
 
-                    conn.Close();
+                conn.Close();
 
-                    MessageBox.Show("Selected rows Deleted!");
+                MessageBox.Show("Selected rows Deleted!");
+
+
+            }
+
+            FormReLoad();
+
+        }
+        private void FormReLoad()
+        {
+            dataGridView1.AutoGenerateColumns = true;
+            string connectionString = "Server=NAN-PC\\MSSQLSERVER01;Database=IMS;Integrated Security=True";
+
+            string sqlCmd = "SELECT * FROM [dbo].[Type] ";
+            SqlConnection conn = new SqlConnection(connectionString);
+
+            conn.Open();
+
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCmd, conn);
+
+
+            DataSet types = new DataSet();
+
+            sqlDataAdapter.Fill(types, "Type");
+
+            dataGridView1.DataSource = types.Tables[0];
+
+            conn.Close();
+        }
+        private void saveBtn_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dataGridView1.)
+            {
+                //if (!row.IsNewRow)
+                //{
+                //    dataGridView1.Rows.Remove(row);
+                //}
+                //MessageBox.Show("Selected rows Deleted");
+
+                ////read the row Id
+                int typeId = (int)row.Cells["Id"].Value;
+
+                ////delete the row with this Id from Database
+                string connectionString = "Server=NAN-PC\\MSSQLSERVER01;Database=IMS;Integrated Security=True;";
+
+                SqlConnection conn = new SqlConnection(connectionString);
+
+                conn.Open();
+
+                string cmdText = "UPDATE [IMS].[dbo].[Type] SET Name = @name, Description = @description  WHERE Id = @Id ;";
+                SqlCommand cmd = new SqlCommand(cmdText, conn);
+                cmd.Parameters.AddWithValue("@Id", typeId);
+                cmd.Parameters.AddWithValue("@name", row.   );
+                cmd.Parameters.AddWithValue("@description", row.Cells);
+                cmd.ExecuteNonQuery();
+
+                conn.Close();
+
+                MessageBox.Show("Selected rows Deleted!");
+
             }
         }
-    }
 
 }
