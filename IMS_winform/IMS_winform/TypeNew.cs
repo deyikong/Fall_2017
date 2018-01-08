@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IMS_winform.Repositories;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,27 +21,12 @@ namespace IMS_winform
 
         private void createBtn_Click(object sender, EventArgs e)
         {
-            string connectionString = "Server=NAN-PC\\MSSQLSERVER01;Database=IMS;Integrated Security=True;";
+            Models.Type type = new Models.Type();
+            type.Name = textBoxName.Text;
+            type.Description = textBoxDes.Text;
 
-            string cmdText =
-                "INSERT INTO [dbo].[Type] (Name, Description) VALUES (@type, @description);";
-
-            //1 Create a connection
-            SqlConnection conn = new SqlConnection(connectionString);
-
-            //2 Open the connection
-            conn.Open();
-
-            //3 Create sqlCommand Object
-            SqlCommand cmd = new SqlCommand(cmdText, conn);
-            cmd.Parameters.AddWithValue("@type", textBoxName.Text);
-            cmd.Parameters.AddWithValue("@description", textBoxDes.Text);
-            
-            //4 Execute Command
-            cmd.ExecuteNonQuery();
-
-            //5 close connection
-            conn.Close();
+            TypeRepository typeRepo = new TypeRepository();
+            typeRepo.Create(type);
 
             MessageBox.Show("Success!");
         }
